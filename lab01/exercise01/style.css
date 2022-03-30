@@ -9,3 +9,30 @@ body {
 /*
 Add some style blocks below this line to style the card.
 */
+
+.page-section {
+    box-sizing: border-box;
+    border: dotted 1px #CCC;
+    width: 50vh;
+    height: 55vh;
+    padding: 10px;
+    /*
+    Alternative syntax:
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    */
+    margin: 10px;
+    /*
+    Alternative syntax:
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    */
+}
+
+.my-img {
+    width: 100%;
+}
