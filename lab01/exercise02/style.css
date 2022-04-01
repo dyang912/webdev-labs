@@ -14,11 +14,35 @@ Feel free to borrow from Exercise 1.
 
 /* Tablet Media Query */
 @media only screen and (max-width: 1000px) {
-
+    section {
+        width: 30%;
+    }
 }
 
 /* Mobile Phone Media Query */
 @media only screen and (max-width: 600px) {
+    section {
+        width: 100%;
+    }
+}
 
-    
+main {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+section {
+    border: solid 1px #CCC;
+    width: 500px;
+    padding-bottom: 10px;
+    margin: 10px;
+}
+
+section h2, section p, section button {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+img {
+    width: 100%;
 }
