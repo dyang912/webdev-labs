@@ -155,12 +155,37 @@ const handleServerMessage = ev => {
     if (data.type === "login") {
         console.log('A user has just connected:');
         console.log(data);
+        let html = `<ul>`, name = data['user_joined'] + ' has'
+        if (data['user_joined'] === username) {
+            name = 'You have'
+        }
+        data['active_users'].map(value => {
+            html += `<li>${value}</li>`
+        })
+        html += `</ul>`
+        document.querySelector('#users-list').innerHTML = html
+        document.querySelector('#update').innerHTML = `${name} joined the chat`
     } else if (data.type === "disconnect") {
         console.log('A user has just disconnected:');
         console.log(data);
+        let html = `<ul>`, name = data['user_left'];
+        data['active_users'].map(value => {
+            html += `<li>${value}</li>`
+        })
+        html += `</ul>`
+        document.querySelector('#users-list').innerHTML = html
+        document.querySelector('#update').innerHTML = `${name} has left the chat`
     } else if (data.type === "chat") {
         console.log('A user has just sent a chat message:');
         console.log(data);
+        let cls = 'left', name = data['username'];
+        if (data['username'] === username) {
+            cls = 'right'
+            name = 'You'
+        }
+        document.querySelector('#chat').innerHTML += `
+                <div class=${cls}><span style="font-weight: bold">${name}:</span> ${data['text']}</div>
+        `
     } else {
         console.error("Message type not recognized.");
         console.log(data);

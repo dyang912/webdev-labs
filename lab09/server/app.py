@@ -22,6 +22,26 @@ PORT = os.environ.get('PORT') or os.environ.get('WS_PORT') or 8081
 async def respond_to_message(websocket, message):
     try:
         data = json.loads(message)
+
+        if data.get('type') == 'login':
+            logged_in_users[websocket] = data.get('username')
+            data = {
+               "type": "login",
+               "active_users": list(logged_in_users.values()),
+               "user_joined": data.get("username")
+            }
+        elif data.get('type') == 'disconnect':
+            del logged_in_users[websocket]
+            data = {
+               "type": "disconnect",
+               "active_users": list(logged_in_users.values()),
+               "user_left": data.get("username")
+            }
+        elif data.get('type') == 'chat':
+            pass
+        else:
+            print('Unrecognized message type:', data)
+            return
     except:
         data = { 
             'error': 'error decoding {0}'.format(message),
