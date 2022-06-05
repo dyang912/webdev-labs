@@ -31,14 +31,13 @@ class App extends React.Component {
     render () {
         return (
             <div>
-                <NavBar title="Photo App"
-                        username={this.state.user?.username} />
-                <aside>
-                    <Profile />
+                <NavBar username={this.state.user?.username} />
+                <div className="recommendations_panel">
+                    <Profile profile={this.state.user}/>
                     <Suggestions />
-                </aside>
+                </div>
 
-                <main className="content">
+                <main className="main_body">
                     <Stories />
                     <Posts />
                 </main>

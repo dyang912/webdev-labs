@@ -1,390 +1,446 @@
-@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap');
-
-* {
-    box-sizing: border-box;
-}
+@import url(https://fonts.googleapis.com/css?family=Comfortaa);
+@import url(https://fonts.googleapis.com/css?family=Nunito);
 
 body {
-    margin: 0px;
+    margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #f2f2f2;
+    background-color: lightgray;
+    justify-content: center;
+    padding-top: 55px;
 }
 
-aside, main, nav {
-    padding: 10px;
+a {
+    color: #3371E6;
+    text-decoration:none;
 }
 
-h1, h2, h3, h4 {
-    font-family: 'Comfortaa', cursive;
-}
-a, a:visited, a:hover, a:link {
-    color: rgb(44, 105, 155);
-}
-a:hover {
-    color: #777;
-}
-button.link {
-    color: rgb(44, 105, 155);
-    background-color: transparent;
-    border-width: 0px;
-}
-button.link:hover {
-    color: #777;
-}
-
-button.link.following {
-    padding: 5px 10px !important;
-}
-button.link.following.active {
+/********** navigation bar start **********/
+.navbar {
+    align-items: center;
     background-color: white;
-    padding: 5px 10px !important;
-    border: solid 1px #CCC;
-    border-radius: 4px;
-}
-header {
-    margin-top: 20px;
-}
-
-nav {
-    position: sticky;
-    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
     width: 100%;
-    background-color: white;
-    border-bottom: solid #dbdbdb 1px;
-    left: 0px;
-    top: 0px;
-    padding: 0px 3vw;
+    padding: 5px 0;
+    z-index: 1;
 }
 
-nav, nav ul, .card .header, .card .buttons, .card .add-comment {
+.logo {
+    font-family: 'Comfortaa', serif;
+    font-size: 30px;
+    font-weight: bold;
+    margin: 10px;
+    padding-left: 20px;
+}
+
+.user {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-}
-nav ul {
     list-style-type: none;
 }
-li {
-    margin-left: 30px;
-}
 
-aside {
+.user li {
+    margin-right: 30px;
+}
+/********** navigation bar end **********/
+
+/********** recommendations panel start **********/
+.recommendations_panel {
     position: fixed;
-    right: 0px;
-    top: 70px;
-    width: calc(40vw - 6px);
-    /* background-color: #fafafa; */
-    background-color: #f2f2f2;
-    height: calc(100vh - 100px);
-    padding-left: 30px;
-}
-main {
-    width: 60vw;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-}
-
-.stories {
+    margin-top: 10px;
     padding: 10px;
+    width: 350px;
+    right: calc((100% - 1050px) / 2);
+}
+
+.profile {
+    align-items: center;
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
-
-    width: 50vw;
-    min-width: 540px;
-    border: solid 1px #dbdbdb;
-    margin-bottom: 30px;
-    background-color: #fff;
-    overflow: hidden;
-}
-.stories > div {
-    margin-right: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.stories > div .pic {
-    min-width: 50px;
-    min-height: 50px;
-    border: solid 3px #dbdbdb;
-    border-radius: 27px;
-}
-.stories p {
-    margin-top: 4px;
-    margin-bottom: 0px;
-    font-size: 0.80em;
-    color: #999;
-    width: 66px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: center;
+    padding-left: 5px;
 }
 
-.card {
-    border: solid 1px #dbdbdb;
-    margin-bottom: 30px;
-    background-color: #fff;
-    width: 50vw;
-    min-width: 540px;
+.profile_pic {
+    border-radius: 50%;
+    width: 75px;
+    height: 75px;
 }
 
-.card img {
-    width: 100%;
-    height: auto;
-}
-.card .header, .card .info {
-    padding: 10px;
-    color: #444;
-}
-
-.card .buttons {
-    font-size: 1.3em;
-    padding: 5px;
-}
-.card .buttons i {
-    margin-right: 4px;
-}
-
-.card  button.link {
-    font-size: 1em;
-}
-
-.card .caption, .card .comments, .likes {
-    padding: 0px 5px;
-}
-.card .caption p, .card .comments p {
-    margin: 8px 0px 3px 0px;
-    font-size: 0.9em;
-}
-.card .timestamp {
-    color: #999;
-    text-transform: uppercase;
-    font-size: 0.70em !important;
-    margin-bottom: 5px;
-}
-.card .add-comment {
-    border-top: solid 1px #dbdbdb;
-    padding: 10px 15px;
-}
-
-.card .add-comment .input-holder {
-    width: 90%;
-}
-
-.card .add-comment input, .card .add-comment input:focus, .card .add-comment input:focus-visible {
-    border-width: 0px;
-    outline: none;
-    font-size: 0.95em;
-    width: 85%;
-    padding: 10px 0px;
-}
-.card .add-comment i {
-    font-size: 1.3em;
-    margin-right: 10px;
-}
-
-.card strong, .modal strong {
-    margin-right: 6px;
-}
-.card p {
-    line-height: 1.2em;
-}
-
-.card .link {
-    margin: 0px;
-    padding: 10px 0px;
-    font-size: 0.9em !important;
-}
-
-.suggestion-text {
-    color: #666;
-    font-weight: 600;
-    letter-spacing: 0px;
-}
-
-.suggestions section {
-    display: grid;
-    grid-template-columns: 35px 2fr 1fr;
-    align-items: center;
-    width: 25vw;
-}
-.suggestions section > div {
-    padding: 8px;
-    width: 200px;
-}
-.suggestions section p, .suggestions section a {
-    margin: 0px;
-}
-.suggestions section p {
-    color: #333;
-    font-weight: 600;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-.suggestions section a {
-    font-size: 0.8em;
-}
-.suggestions section p:nth-child(2) {
-    color: #666;
-    font-size: 0.8em;
-    font-weight: 400;
-}
-.suggestions section .pic {
-    min-width: 30px;
-    min-height: 30px;
-    border: solid 1px #dbdbdb;
-    border-radius: 15px;
-}
-aside header > div {
-    display: flex;
-    align-items: center;
-    width: 25vw;
-}
-
-aside header .pic {
-    min-width: 60px;
-    min-height: 60px;
-    border-radius: 33px;
-    border-width: 0px;
-    margin-right: 20px;
-}
-.visuallyhidden {
-    display: none;
-}
-
-.modal-bg {
-    background: rgba(40, 40, 40, 0.8);
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0px;
-    left: 0px;
-    z-index: 100;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.modal-bg .close {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background: transparent;
-    color: white;
-    border: 0;
-    font-size: 2em;
-}
-
-div.modal {
-    background: white;
-    height: 80vh;
-    width: 90vw;
-    background: #EEE;
-    border-radius: 6px;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    overflow-y: hidden;
-    align-items: center;
-}
-div.modal .container {
-    height: 100%;
-    overflow-y: auto;
-    background: #fff;
-    min-width: 300px;
-}
-div.modal .container h3 {
-    padding: 20px;
-    border-bottom: solid 1px #F2f2f2;
-    margin: 0px;
-    display: flex;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    background: white;
-    z-index: 100;
-}
-div.modal .container .pic {
-    min-width: 30px;
-    min-height: 30px;
-    border-radius: 15px;
-    border-width: 0px;
-    margin-right: 10px;
-}
-div.modal .container .body {
-    padding: 20px;
-    color: #555;
-}
-div.modal .featured-image {
-    width: 100%;
-    height: 100%;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-}
-
-body.modal {
-    overflow-y: hidden;
-}
-
-.hidden {
-    display: none;
-}
-
-.comment {
-    display: grid;
-    align-items: flex-start;
-    grid-template-columns: 50px auto 30px;
-    font-size: 0.9em;
-    margin-bottom: 20px;
-}
-.comment p {
-    margin-top: 0px;
-    margin-bottom: 6px;
-}
-.comment span {
+.profile_name {
+    margin-left: 20px;
+    font-family: 'Comfortaa', serif;
+    font-size: xx-large;
     font-weight: bold;
 }
 
-.comment button {
-    background: transparent;
-    border: 0;
+.suggestions {
+    padding: 5px;
 }
 
-button.like, button.bookmark {
-    background: transparent;
-    padding: 0px;
-    font-size: 1em;
-    border: 0;
+.suggestions_text {
+    color: gray;
+    font-family: Arial, serif;
+    font-weight: bold;
+    font-size: large;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 350px;
 }
+
+.suggestions_unit {
+    align-items: center;
+    display: flex;
+    font-family: Arial, serif;
+}
+
+.suggestions_unit_pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: solid 2px darkgray;
+}
+
+.suggestions_unit_body {
+    margin-left: 10px;
+    padding: 15px;
+}
+
+.suggestions_unit_body_name {
+    font-size: large;
+    font-weight: bold;
+}
+
+.suggestions_unit_body_text {
+    font-size: 15px;
+    color: gray;
+}
+
+.suggestions_unit_follow {
+    background: transparent;
+    border: 0;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #1854C3;
+    margin-right: 0;
+    margin-left: auto;
+    font-size: medium;
+}
+
+.suggestions_unit_unfollow {
+    background: white;
+    border: 1px lightgray;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #1854C3;
+    margin-right: 0;
+    margin-left: auto;
+    font-size: medium;
+}
+/********** recommendations panel end **********/
+
+.main_body {
+    width: 600px;
+    position: absolute;
+    right: calc((100% - 1050px) * 0.5 + 375px);
+}
+
+/********** story panel start **********/
+.story_panel {
+    background-color: white;
+    display: flex;
+    margin-top: 20px;
+    padding: 10px;
+    overflow: auto;
+}
+
+.story_panel_unit {
+    margin-right: 5px;
+    padding: 5px;
+    width: 65px;
+    text-align: center;
+}
+
+.story_panel_unit_pic {
+    border: solid 3px lightgray;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.story_panel_unit_name {
+    color: darkgray;
+    font-family: Arial, serif;
+    font-size: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+/********** story panel end **********/
+
+/********** card start **********/
+.card {
+    background-color: white;
+    border: darkgray solid 1px;
+    margin-top: 10px;
+}
+
+.card_header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.card_header_name {
+    font-family: 'Comfortaa', serif;
+    font-size: larger;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.card_header_icon {
+    padding: 10px;
+}
+
+.card_img {
+    width: 100%;
+    height: auto;
+}
+
+.card_content {
+    padding: 5px;
+}
+
+.card_content_icons {
+    padding: 10px;
+    font-size: larger;
+}
+
+.card_content_icons_icon {
+    cursor: pointer;
+    padding-right: 5px;
+}
+
 .fas.fa-heart {
-    color: #cf0c0c;
+    color: red;
 }
 
-
-@media (max-width: 900px) {
-    aside {
-        display: none;
-    }
-    main {
-        width: 100vw;
-        padding: 0px;
-        align-items: center;
-    }
-    .card, .stories {
-        width: 75vw;
-        min-width: auto;
-    }
+.card_content_icons_bookmark {
+    cursor: pointer;
+    float: right;
+    padding-right: 10px;
 }
 
-@media (max-width: 700px) {
-    .card, .stories {
-        width: 90vw;
-    }
-    div.modal {
-        grid-template-columns: 1fr;
-    }
-    div.modal .featured-image {
+.card_content_like_num {
+    font-family: Arial, serif;
+    font-weight: 900;
+    padding-left: 10px;
+}
+
+.card_content_like {
+    font-family: Arial, serif;
+    font-weight: 900;
+}
+
+.card_content_post {
+    font-family: Arial, serif;
+    padding: 10px;
+}
+
+.card_content_post_name {
+    font-weight: bold;
+}
+
+.card_content_post_more {
+    color: #3371E6;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.card_content_comments {
+    font-family: Arial, serif;
+    padding-left: 10px;
+}
+
+.card_content_comments_unit {
+    padding-bottom: 5px;
+}
+
+.card_content_comments_unit_name {
+    font-weight: bold;
+}
+
+.card_content_comments_viewall {
+    background: transparent;
+    border: 0;
+    color: #3371E6;
+    cursor: pointer;
+    font-size: medium;
+    padding: 5px;
+}
+
+.card_content_time {
+    color: #757575;
+    font-family: Arial, serif;
+    font-size: small;
+    padding-bottom: 5px;
+    padding-left: 10px;
+}
+
+.card_add_comment {
+    align-items: center;
+    border-top: darkgray solid 1px;
+    font-family: Arial, serif;
+    font-size: larger;
+    padding: 15px 5px;
+}
+
+.card_add_comment_input {
+    padding: 10px;
+    font-size: 0;
+}
+
+.card_add_comment_input_icon {
+    font-size: medium;
+}
+
+.card_add_comment_input_textbox {
+    border: none;
+    width: 79%;
+    padding-left: 10px;
+    font-size: large;
+}
+
+.card_add_comment_submit {
+    background: transparent;
+    border: 0;
+    color: #3371E6;
+    cursor: pointer;
+    font-size: large;
+    margin: 10px;
+}
+/********** card end **********/
+
+
+/********** modal start **********/
+
+.modal_bg {
+    background: rgba(50, 50, 50, 0.8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+.modal_close {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    position: fixed;
+    top: 100px;
+    right: 100px;
+    color: white;
+    font-weight: bold;
+    font-size: xxx-large;
+}
+
+.modal_img {
+    float: left;
+    width: 70%;
+}
+
+.modal_comments {
+    height: 100%;
+    width: 30%;
+    right: 0;
+    border-radius:0;
+    overflow: auto;
+    position: relative;
+}
+
+.modal_comments_profile {
+    height: 10%;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: left;
+    padding-left: 10px;
+    border: solid 1px #ebebeb;
+    background-color: white;
+    z-index: 3;
+}
+
+.modal_comments_profile_img {
+    align-self: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: solid 2px darkgray;
+}
+
+.modal_comments_profile_name {
+    margin-left: 20px;
+    font-family: 'Comfortaa', serif;
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+.modal_comments_content_unit {
+    display: flex;
+    justify-content: space-around;
+    padding-bottom: 5px;
+    margin-top: 15px;
+}
+
+.modal_comments_unit_icon {
+    height: 20px;
+    background: transparent;
+    border: 0;
+    position: relative;
+    right: 0;
+    padding: 0 10px;
+}
+
+.modal_comments_unit_icon_i {
+    font-size: inherit;
+}
+
+.modal_comments_content_img {
+    border-radius:50%;
+    width: 40px;
+    height: 40px;
+}
+
+.modal_comments_content_text {
+    width: 60%;
+}
+
+.modal_comments_content_text_time {
+    margin-top: 1%;
+    color:#757575;
+    margin-bottom: 2%;
+}
+
+.modal {
+    width: 70%;
+    height: 70%;
+    background-color: white;
+    border-radius: 5px;
+    display: flex;
+    margin: auto;
+}
+
+/********** modal end **********/
+
+@media only screen and (max-width: 1000px) {
+    .recommendations_panel {
         display: none;
+    }
+    .main_body {
+        right: calc((100% - 600px)/2);
     }
 }

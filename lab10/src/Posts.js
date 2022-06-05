@@ -28,11 +28,11 @@ class Posts extends React.Component {
 
     render () {
         return (
-            <div id="posts">
+            <div id="posts_content">
                 {
                     this.state.posts.map(post => {
                         return (
-                            <Post model={post} key={'post-' + post.id} />
+                            <Post post={post} key={'post-' + post.id} />
                         )
                     })
                 }

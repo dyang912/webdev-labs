@@ -1,22 +1,32 @@
-import React from 'react';
+import React, {useState} from 'react';
+import {getHeaders} from "./utils";
 
-class Stories extends React.Component {
+const Stories = () => {
+    const [stories, setStories] = useState([])
 
-    constructor(props) {
-        super(props);
-        // constructor logic
-        console.log('Stories component created');
-    }
+    fetch('/api/stories', {
+        headers: getHeaders()
+    })
+        .then(response => response.json())
+        .then(data => {
+            setStories(data)
+        })
 
-    componentDidMount() {
-        // fetch posts
-        console.log('Stories component mounted');
-    }
-    render () {
-        return (
-            <header className="stories"></header>
-        );
-    }
+    return (
+        <div className="story_panel">
+            {Object.values(stories).map(value => <Story story={value} />)}
+        </div>
+    )
+}
+
+const Story = ({story}) => {
+    return (
+        <div className="story_panel_unit">
+            <img className="story_panel_unit_pic" src={ story.user.image_url }
+                 alt={"profile pic for" + story.user.username } />
+            <div className="story_panel_unit_name">{story.user.username}</div>
+        </div>
+    )
 }
 
 export default Stories;
