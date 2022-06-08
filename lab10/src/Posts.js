@@ -32,7 +32,7 @@ class Posts extends React.Component {
                 {
                     this.state.posts.map(post => {
                         return (
-                            <Post post={post} key={'post-' + post.id} />
+                            <Post p={post} key={'post-' + post.id} />
                         )
                     })
                 }

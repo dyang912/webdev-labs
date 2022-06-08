@@ -1,70 +1,32 @@
-import React from 'react';
-// import LikeButton from './LikeButton';
-// import {getHeaders} from './utils';
-// import BookmarkButton from "./BookmarkButton";
+import React, {useRef, useState} from 'react';
+import Modal from "./Modal";
+import LikeButton from "./LikeButton";
+import {getHeaders} from "./utils";
+import BookmarkButton from "./BookmarkButton";
 
-// class Post extends React.Component {
-//
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             post: this.props.model
-//         }
-//
-//         this.requeryPost = this.requeryPost.bind(this);
-//     }
-//
-//     requeryPost() {
-//         fetch(`/api/posts/${this.state.post.id}`, {
-//                 headers: getHeaders()
-//             })
-//             .then(response => response.json())
-//             .then(data => {
-//                 this.setState({
-//                     post: data
-//                 });
-//             });
-//     }
-//
-//     render () {
-//         const post = this.state.post;
-//         if (!post) {
-//             return (
-//                 <div />
-//             );
-//         }
-//         return (
-//             <section className="card">
-//                 <div className="header">
-//                     <h3>{ post.user.username }</h3>
-//                     <i className="fa fa-dots" />
-//                 </div>
-//
-//                 <img
-//                     src={ post.image_url }
-//                     alt={'Image posted by ' +  post.user.username }
-//                     width="300"
-//                     height="300" />
-//
-//                 <div className="info">
-//                     <div>
-//                         <LikeButton
-//                             postId={post.id}
-//                             likeId={post.current_user_like_id}
-//                             requeryPost={this.requeryPost} />
-//                         <BookmarkButton
-//                             postId={post.id}
-//                             bookmarkId={post.current_user_bookmark_id}
-//                             requeryPost={this.requeryPost} />
-//                     </div>
-//                     <p>{ post.caption }</p>
-//                 </div>
-//             </section>
-//         );
-//     }
-// }
+const Post = ({p}) => {
+    const [post, setPost] = useState(p);
+    const [showModal, setShowModal] = useState(false);
+    const [input, setInput] = useState("");
+    const [likeLabel, setLikeLabel] = useState(post.current_user_like_id ? 'Unlike' : 'Like');
+    const [likeChecked, setLikeChecked] = useState(post.current_user_like_id ? 'true' : 'false');
+    const [bookmarkLabel, setBookmarkLabel] = useState(post.current_user_bookmark_id ? 'Unbookmark' : 'Bookmark');
+    const [bookmarkChecked, setBookmarkChecked] = useState(post.current_user_bookmark_id ? 'true' : 'false');
+    const textInput = useRef(null);
 
-const Post = ({post}) => {
+    const requeryPost = () => {
+        fetch(`/api/posts/${post.id}`, {
+            headers: getHeaders()
+        })
+            .then(response => response.json())
+            .then(data => {
+                setPost(data);
+            });
+    }
+
+    const focusTextInput = () => {
+        textInput.current.focus();
+    }
 
     return (
         <div className="card" id={"post_"+post.id}>
@@ -77,20 +39,18 @@ const Post = ({post}) => {
 
             <div className="card_content">
                 <div className="card_content_icons">
-                    <i className={ (post.current_user_like_id ? 'fas' : 'far') + " fa-heart card_content_icons_icon"}
-                       data-post-id={ post.id }
-                       data-like-id={ post.current_user_like_id }
-                       onClick="HandleLike(event)"
-                       aria-label={ post.current_user_like_id ? 'Unlike' : 'Like' }
-                       aria-checked={ post.current_user_like_id ? 'true' : 'false' } />
+                    <LikeButton
+                        likeLabel={likeLabel}  setLikeLabel={setLikeLabel}
+                        likeChecked={likeChecked}  setLikeChecked={setLikeChecked}
+                        postId={post.id}  likeId={post.current_user_like_id}
+                        requeryPost={requeryPost}/>
                     <i className="far fa-comment card_content_icons_icon" />
                     <i className="far fa-paper-plane card_content_icons_icon" />
-                    <i className={ (post.current_user_bookmark_id ? 'fas' : 'far') + " fa-bookmark card_content_icons_bookmark"}
-                       data-post-id={ post.id }
-                       data-bookmark-id={ post.current_user_bookmark_id }
-                       onClick="HandleBookmark(event)"
-                       aria-label={ post.current_user_bookmark_id ? 'Unbookmark' : 'Bookmark' }
-                       aria-checked={ post.current_user_bookmark_id ? 'true' : 'false' } />
+                    <BookmarkButton
+                        bookmarkLabel={bookmarkLabel}  setBookmarkLabel={setBookmarkLabel}
+                        bookmarkChecked={bookmarkChecked}  setBookmarkChecked={setBookmarkChecked}
+                        postId={post.id}  bookmarkId={post.current_user_bookmark_id}
+                        requeryPost={requeryPost}/>
                 </div>
 
                 <span className="card_content_like_num" id={"like_num_"+ post.id }>{ post.likes.length } </span>
@@ -103,7 +63,9 @@ const Post = ({post}) => {
                 </div>
 
                 <div className="card_content_comments">
-                    <button className="card_content_comments_viewall" data-post-id={post.id} onClick="showModal(event)">
+                    <button className="card_content_comments_viewall"
+                            data-post-id={post.id}
+                            onClick={() => {setShowModal(true)}}>
                         View all {post.comments.length} comments
                     </button>
                     { post.comments.length >= 1 ?
@@ -124,17 +86,46 @@ const Post = ({post}) => {
                 <label className="card_add_comment_input">
                     <i className="far fa-smile card_add_comment_input_icon" />label
                     <input className="card_add_comment_input_textbox" id={"comment_input_"+post.id}
-                           type="text" placeholder="Add a comment..." />
+                           type="text" placeholder="Add a comment..." value={input}
+                           onChange={(e) => setInput(e.target.value)}
+                            ref={textInput}/>
                 </label>
 
                 <button className="card_add_comment_submit"
-                        onClick="HandleComment(event)"
+                        onClick={e => HandleComment(e, post.id, input, setInput, requeryPost, focusTextInput)}
                         data-post-id={ post.id }>
                     Post
                 </button>
             </div>
+
+            {showModal? <Modal post={post} setShowModal={setShowModal} /> : null }
         </div>
     );
+}
+
+const HandleComment = (e, pid, input, setInput, requeryPost, focusTextInput) => {
+    const postData = {
+        "post_id": pid,
+        "text": input,
+    }
+
+    fetch('/api/comments', {
+        method: "POST",
+        headers: getHeaders(),
+        body: JSON.stringify(postData)
+    })
+        .then(response => {
+            if (response.ok) {
+                response.json().then(data => {
+                    console.log(data)
+                    setInput("");
+                    requeryPost();
+                    focusTextInput();
+                })
+            } else {
+                response.json().then(data => console.log("Error:", data))
+            }
+        })
 }
 
 export default Post;

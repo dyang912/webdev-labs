@@ -14,7 +14,7 @@ const Stories = () => {
 
     return (
         <div className="story_panel">
-            {Object.values(stories).map(value => <Story story={value} />)}
+            {Object.values(stories).map(value => <Story story={value} key={value.id} />)}
         </div>
     )
 }

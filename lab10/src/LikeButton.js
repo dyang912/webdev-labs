@@ -36,6 +36,8 @@ class LikeButton extends React.Component {
             if (response.ok) {
                 response.json().then(data => {
                     console.log(data)
+                    this.props.setLikeLabel('Unlike')
+                    this.props.setLikeChecked('true')
                     this.props.requeryPost()
                 })
             } else {
@@ -55,6 +57,8 @@ class LikeButton extends React.Component {
             if (response.ok) {
                 response.json().then(data => {
                     console.log(data)
+                    this.props.setLikeLabel('Like')
+                    this.props.setLikeChecked('false')
                     this.props.requeryPost()
                 })
             } else {
@@ -66,13 +70,10 @@ class LikeButton extends React.Component {
     render () {
         const likeId = this.props.likeId;
         return (
-            <button role="switch"
-                className="like" 
-                aria-label="Like Button" 
-                aria-checked={likeId ? true : false}
-                onClick={this.toggleLike}>
-                <i className={likeId ? 'fas fa-heart' : 'far fa-heart'} />
-            </button>
+            <i className={"card_content_icons_icon " + (likeId ? 'fas fa-heart' : 'far fa-heart')}
+               aria-label={this.props.likeLabel}
+               aria-checked={this.props.likeChecked}
+               onClick={this.toggleLike}/>
         ) 
     }
 }

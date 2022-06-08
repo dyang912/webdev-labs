@@ -36,6 +36,8 @@ class BookmarkButton extends React.Component {
             if (response.ok) {
                 response.json().then(data => {
                     console.log(data)
+                    this.props.setBookmarkLabel('Unbookmark')
+                    this.props.setBookmarkChecked('true')
                     this.props.requeryPost()
                 })
             } else {
@@ -55,6 +57,8 @@ class BookmarkButton extends React.Component {
             if (response.ok) {
                 response.json().then(data => {
                     console.log(data)
+                    this.props.setBookmarkLabel('Bookmark')
+                    this.props.setBookmarkChecked('false')
                     this.props.requeryPost()
                 })
             } else {
@@ -66,13 +70,10 @@ class BookmarkButton extends React.Component {
     render () {
         const bookmarkId = this.props.bookmarkId;
         return (
-            <button role="switch"
-                className="like" 
-                aria-label="Like Button" 
-                aria-checked={bookmarkId ? true : false}
-                onClick={this.toggleBookmark}>
-                <i className={bookmarkId ? 'fas fa-bookmark' : 'far fa-bookmark'} />
-            </button>
+            <i className={"card_content_icons_bookmark " + (bookmarkId ? 'fas fa-bookmark' : 'far fa-bookmark')}
+               aria-label={this.props.bookmarkLabel}
+               aria-checked={this.props.bookmarkChecked}
+               onClick={this.toggleBookmark}/>
         ) 
     }
 }
