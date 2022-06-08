@@ -1,0 +1,24 @@
+1.The answer to your accessibility questions.
+    (1) Were React’s compilation warning/error messages helpful?
+    Yes. The messages will show the exact line numbers and the reason why there is an error. It helps me improve
+    the quality of my web page.
+
+    (2) Did React’s compilation warning/error messages prompt you to consider making your site more accessible?
+    No, they did not. The compilation errors are more about the must-obey rules or basic functions. They do not give
+    me suggestions about accessibility or layout.
+
+    (3) Did you consider conducting accessibility testing on your lab assignment? Why or why not?
+    Yes. I think accessibility is important for a website, especially a page used for people interacting. With high
+    accessibility, more people can visit this web page and communicate with others.
+
+    (4) If you tested your site for accessibility and found issues, were you able to solve them? What did you do to try
+    to solve them? What stopped you from successfully resolving or trying to resolve the issues?
+    Yes, I could solve them. With the training and hints from the previous labs and lectures, I have basic knowledge
+    about implementing accessibility on a website, such as contrast and easy-to-use.
+
+2. The name of your partner
+    I finished it alone.
+
+3. Which extra credit options you attempted
+    I implement the "show modal" functionality using a react component.
+    Refer to /src/Modal.js
